@@ -2,7 +2,6 @@ import {ThunkDispatch} from 'redux-thunk'
 import {IState, IID, IPause} from './interfaces'
 
 export enum TileStatuses {
-  INIT = 'INIT',
   CLOSED = 'CLOSED',
   OPEN = 'OPEN',
   SOLVED = 'SOLVED',

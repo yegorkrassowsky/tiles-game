@@ -4,7 +4,7 @@ import {IState, ITile} from './interfaces'
 import {ActionType, ActionTypes, TileStatuses} from './types'
 import {shuffle} from './utils'
 
-const defaultTiles = new Array(8).fill(null).map((value, index) => ({color: index+1, status: TileStatuses.INIT}))
+const defaultTiles = new Array(8).fill(null).map((value, index) => ({color: index+1, status: TileStatuses.CLOSED}))
 const initTiles = (tiles: any[]): any[] => shuffle([...tiles, ...tiles].map((tile, index) => ({...tile, id: index})))
 
 const initialState = {
