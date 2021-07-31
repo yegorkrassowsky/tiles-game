@@ -1,0 +1,70 @@
+$primary-color: #6C5B7B;
+
+$color-list: #A8E6CE #DCEDC2 #FFD3B5 #FFAAA6 #FF8C94 #CCBF82 #5E8C6A #53777A;
+
+@for $i from 1 through 8 {
+  .color-#{$i} {
+    background-color: nth($color-list, $i)
+  }
+}
+
+.App {
+  color: $primary-color;
+  .btn {
+    background-color: transparent;
+    border: 2px solid $primary-color;
+    color : $primary-color;
+    padding: 4px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .heading {
+    margin: 0 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .board {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    .tile {
+      width: 23%;
+      border: 2px solid $primary-color;
+      border-radius: 5px;
+      margin: 1%;
+      cursor: pointer;
+      &.open {
+        pointer-events: none;
+      }
+      &.solved {
+        cursor: default;
+        opacity: 0;
+        pointer-events: none;
+      }
+      &:before {
+        content: "";
+        float: left;
+        padding-top: 100%;
+      }
+    }
+    &.pause {
+      .tile {
+        pointer-events: none;
+      }
+    }
+    &.win {
+      .tile {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+}
