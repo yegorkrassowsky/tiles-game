@@ -1,9 +1,8 @@
 import React from 'react'
 import {IState, IRound, IWin} from '../interfaces'
 import {connect} from 'react-redux'
-import {Dispatch} from 'redux'
-import {initAction} from '../actions'
-import { ActionType } from '../types'
+import {restartAction} from '../actions'
+import { ThunkDispatchType } from '../types'
 
 type HeadingProps = {
   restart: () => void
@@ -18,8 +17,8 @@ const Heading: React.FC<HeadingProps> = ({round, win, restart}) => {
   )
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionType>) => ({
-  restart: () => {dispatch(initAction())}
+const mapDispatchToProps = (dispatch: ThunkDispatchType) => ({
+  restart: () => {dispatch(restartAction())}
 })
 
 export default connect((state: IState) => ({

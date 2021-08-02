@@ -3,7 +3,7 @@ $primary-color: #6C5B7B;
 $color-list: #A8E6CE #DCEDC2 #FFD3B5 #FFAAA6 #FF8C94 #CCBF82 #5E8C6A #53777A;
 
 @for $i from 1 through 8 {
-  .color-#{$i} {
+  .color-#{$i}:before {
     background-color: nth($color-list, $i)
   }
 }
@@ -32,22 +32,48 @@ $color-list: #A8E6CE #DCEDC2 #FFD3B5 #FFAAA6 #FF8C94 #CCBF82 #5E8C6A #53777A;
     flex-wrap: wrap;
     .tile {
       width: 23%;
-      border: 2px solid $primary-color;
-      border-radius: 5px;
       margin: 1%;
       cursor: pointer;
-      &.open {
-        pointer-events: none;
-      }
-      &.solved {
-        cursor: default;
-        opacity: 0;
-        pointer-events: none;
-      }
+      position: relative;
+      perspective: 1000px;
+      transition: .5s opacity ease-in-out;
       &:before {
         content: "";
         float: left;
         padding-top: 100%;
+        width: 100%;
+        border: 2px solid $primary-color;
+        border-radius: 5px;
+        transform: rotateY(0deg);
+        transform-style: preserve-3d;
+        transition: .5s transform ease-in-out;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-top: 100%;
+        background-color: #fff;
+        backface-visibility: hidden;
+        border: 2px solid $primary-color;
+        border-radius: 5px;
+        transform: rotateY(0deg);
+        transform-style: preserve-3d;
+        transition: .5s transform ease-in-out;
+      }
+      &.open,
+      &.solved {
+        pointer-events: none;
+        &:before,
+        &:after {
+          transform: rotateY(180deg);
+        }
+      }
+      &.solved {
+        cursor: default;
+        opacity: 0;
       }
     }
     &.pause {

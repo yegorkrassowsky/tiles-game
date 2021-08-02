@@ -9,15 +9,15 @@ type TileProps = {
 } & ITile
 
 const Tile: React.FC<TileProps> = ({id, color, status, open}) => {
-  let classes = ['tile']
+  let classes = ['tile', `color-${color}`]
   if(status === TileStatuses.OPEN) {
-    classes.push(`open color-${color}`)
+    classes.push(`open`)
   }
   if(status === TileStatuses.CLOSED) {
     classes.push('closed')
   }
   if(status === TileStatuses.SOLVED) {
-    classes.push(`solved color-${color}`)
+    classes.push(`solved`)
   }
   return (
     <div className={classes.join(' ')} onClick={() => open(id)}>

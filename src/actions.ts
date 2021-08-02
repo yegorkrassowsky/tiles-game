@@ -17,11 +17,16 @@ const solveAction = () => (dispatch: ThunkDispatchType, getState: GetStateType) 
       setTimeout(() => {
         if(opened[0].color === opened[1].color) {
           opened.forEach(tile => dispatch({type: ActionTypes.SOLVE, id: tile.id}))
-          dispatch({type: ActionTypes.ROUND})
         } else {
           opened.forEach(tile => dispatch({type: ActionTypes.CLOSE, id: tile.id}))
-          dispatch({type: ActionTypes.ROUND})
         }
+        dispatch({type: ActionTypes.ROUND})
       }, 1000)
     }
+}
+
+export const restartAction = () => (dispatch: ThunkDispatchType, getState: GetStateType) => {
+  getState().tiles.forEach(tile => dispatch({type: ActionTypes.CLOSE, id: tile.id}))
+  dispatch({type: ActionTypes.PAUSE, pause: true})
+  setTimeout(() => dispatch(initAction()), 1000)
 }

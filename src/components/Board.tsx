@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import Tile from './Tile'
 import {IState, ITiles, IPause, IWin} from '../interfaces'
@@ -6,11 +6,16 @@ import {IState, ITiles, IPause, IWin} from '../interfaces'
 type BoardProps = {} & ITiles & IPause & IWin
 
 const Board: React.FC<BoardProps> = ({tiles, pause, win}) => {
+  const [delayedWin , setDelayedWin] = useState(false)
+  useEffect(() => {
+    const timeout = setTimeout(() => setDelayedWin(win), 1000)
+    return () => clearTimeout(timeout)
+  }, [win])
   let classes = ['board']
   if(pause) {
     classes.push('pause')
   }
-  if(win) {
+  if(delayedWin) {
     classes.push('win')
   }
   return (
